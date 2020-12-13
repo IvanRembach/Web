@@ -1,0 +1,431 @@
+@import '_variables';
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin button($background:white, $color:black) {
+    background-color: $background;
+    color: $color;
+}
+
+@mixin button-hover($hover-color:red) {
+    color: $hover-color;
+}
+
+@mixin button-active($active-background:white, $active-shadow:black) {
+    transform: translateY(4px);
+    background-color: $active-background;
+    box-shadow: 0px 5px $active-shadow;
+}
+
+header {
+    left: 0px;
+    top: 0px;
+    height: 100px;
+    width: 100%;
+    z-index: 5;
+    position: fixed;
+    background-color: $menu-color;
+
+    >div {
+
+        @include center;
+        margin-left: auto;
+        margin-right: auto;
+
+
+
+        width: 1200px;
+        min-height: 100px;
+        align-items: center;
+        height: 50px;
+        background-color: inherit;
+
+        img {
+            max-width: 20px;
+            max-height: 30px;
+        }
+
+        * {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        >nav {
+            margin-left: auto;
+            margin-right: 0px;
+
+            .header-button {
+                -webkit-transition: all 0.3s ease;
+                ;
+                -moz-transition: all 0.3s ease;
+                ;
+                -o-transition: all 0.3s ease;
+                ;
+                transition: all 0.3s ease;
+                @include button(inherit, map-get($button-colors, "header_a"));
+                opacity: 0.5;
+            }
+
+            .header-button:hover {
+                color: map-get($button-colors, 'header_a_hover');
+                @include button-hover(map-get($button-colors, "header_a_hover"));
+                opacity: 1;
+            }
+
+            button {
+                @extend .header-button;
+            }
+
+        }
+    }
+}
+
+button:active {
+    @include button-active(map-get($button-colors, "button_active"), map-get($button-colors, "button_active_shadow"));
+}
+
+
+html {
+    font-family: $main-font-family;
+    @include center;
+
+    #best_books {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 125px;
+        margin-left: auto;
+        margin-right: auto;
+
+
+        overflow: auto;
+
+        #carousel {
+            display: flex;
+            justify-content: center;
+            width: 400px;
+            height: 525px;
+            position: relative;
+            overflow: hidden;
+
+            .book {
+                display: none;
+            }
+
+            .book.active {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
+        }
+
+        button {
+            @include button(inherit, map-get($button-colors, "header_a"));
+        }
+
+        button:active {
+            @include button-active(map-get($button-colors, "button_active"), map-get($button-colors, "button_active_shadow"));
+            transform: translateY(0px);
+            box-shadow: none;
+        }
+
+    }
+
+    main {
+        width: 1200px;
+        display: flex;
+        margin-top: 25px;
+
+        >.books-box {
+            width:950px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+
+.book {
+    padding: 20px;
+
+    img {
+        max-width: 200px;
+        max-height: 250px;
+        min-width: 20px;
+        min-height: 30px;
+        cursor: pointer;
+    }
+
+    .descrition {
+        overflow: scroll;
+        width: 300px;
+        height: 150px;
+        padding: 5px;
+        border: solid 1px black;
+    }
+}
+
+
+
+aside {
+    width: 250px;
+    position: relative;
+    justify-self: end;
+    justify-content: center;
+    flex-direction: row;
+}
+
+ul.list {
+    list-style-position: inside;
+    list-style-type: square;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-inline-start: 0px;
+}
+
+td {
+    padding: 5px;
+    text-align: center;
+
+}
+
+th,
+td {
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: rgb(197, 192, 192);
+}
+
+table {
+    border: 2px black solid;
+}
+
+footer {
+    width: 100%;
+    height: 200px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: auto;
+    left: 0px;
+    background-color: $menu-color;
+
+}
+
+footer>div {
+
+    display: flex;
+    justify-content: center;
+    width: 30%;
+
+    * {
+        margin: 5px;
+    }
+}
+
+.animation {
+    animation-duration: 1s;
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    0% {
+        transform: translateY(50%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.none {
+    display: none;
+}
+
+
+#login {
+    background-color: rgb(141, 218, 136);
+    right: 225px;
+    height: 250px;
+
+}
+
+#signup {
+    background-color: rgb(54, 177, 45);
+    right: 150px;
+}
+
+#signup-button {
+    opacity: 1;
+}
+
+.authorithation {
+    position: fixed;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    width: 350px;
+    height: 275px;
+    border-radius: 15px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        * {
+            margin: 5px;
+        }
+
+        *:invalid {
+            border: 2px solid;
+            border-color: red;
+        }
+    }
+}
+
+#contact {
+    z-index: 1;
+    border-radius: 15px;
+    position: fixed;
+    background-color: rgb(141, 218, 136);
+    top: 25%;
+    left: 35%;
+    width: 30%;
+    height: 50%;
+    bottom: auto;
+    right: auto;
+    justify-content: center;
+    flex-direction: column;
+
+    .closing {
+        display: flex;
+        justify-content: center;
+    }
+
+    form {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+
+        * {
+            margin: 10px;
+        }
+
+        div {
+            margin: 0px;
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+
+            * {
+                margin: 10px;
+            }
+
+            #message_text {
+                height: 100px;
+            }
+        }
+
+    }
+}
+
+.visible_flex {
+    display: flex;
+}
+
+dt,
+dd {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+dl {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 60%;
+
+    li {
+        margin: 0 3px 3px 3px;
+        padding: 0.4em;
+        padding-left: 1.5em;
+        font-size: 1.4em;
+        height: 18px;
+        background-color: $menu-color;
+    }
+}
+
+#tabs {
+    margin: 10px 0;
+}
+
+.tabs-nav {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+
+    li {
+        display: block;
+        float: left;
+        padding: 0;
+        list-style: none;
+
+        a {
+            display: block;
+            border-right: 1px solid #ccc;
+            border-radius: 0 5px 0 0;
+        }
+    }
+
+    a {
+        display: block;
+        padding: 10px 20px;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        background: #fbfbfb;
+        font-size: 16px;
+        text-decoration: none;
+        text-align: center;
+        color: #999;
+    }
+    a.active {
+        border-bottom: 1px solid #fff;
+        background: #fff;
+        color: #000;
+    }
+}
+
+
+.tabs-items {
+    border: 1px solid #ccc;
+    border-radius: 0 5px 5px 5px;
+    background: #fff;
+    margin: -1px 0 0 0;
+}
+
+.tabs-item {
+    padding: 15px;
+}
